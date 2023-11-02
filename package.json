@@ -15,6 +15,6 @@
     "vite-bundle-visualizer": "^0.10.0"
   },
   "dependencies": {
-    "@novakod/deep-proxy": "^0.3.0"
+    "@novakod/deep-proxy": "^0.5.1"
   }
 }
