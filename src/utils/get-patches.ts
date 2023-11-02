@@ -8,7 +8,6 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
 
   const deepProxy = createDeepProxy(structuredClone(data), {
     set({ target, key, value, path, reciever }) {
-      console.log("set", { target, key, value, path, reciever });
       let type: PatchType = "add";
       if (Object.hasOwn(target, key)) type = "update";
       patches.push({
@@ -18,9 +17,7 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
         nextValue: structuredClone(value),
       });
 
-      target[key] = value;
-
-      return true;
+      return Reflect.set(target, key, value, reciever);
     },
     deleteProperty({ target, key, path }) {
       patches.push({
@@ -29,7 +26,8 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
         previousValue: structuredClone(target[key]),
         nextValue: undefined,
       });
-      return delete target[key];
+
+      return Reflect.deleteProperty(target, key);
     },
   });
 
