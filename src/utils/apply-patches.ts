@@ -12,7 +12,8 @@ export function applyPatches<Data extends object>(data: Data, patches: Patch[]):
         nestedData[key as keyof Data] = patch.nextValue as any;
         break;
       case "remove":
-        delete nestedData[key as keyof Data];
+        if (Array.isArray(nestedData)) nestedData.splice(Number(key), 1);
+        else delete nestedData[key as keyof Data];
         break;
     }
   });

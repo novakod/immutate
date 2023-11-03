@@ -30,8 +30,11 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
       return Reflect.get(target, key, reciever);
     },
     set({ target, key, value, path, reciever }) {
+      if (key === "length" && Array.isArray(target)) return Reflect.set(target, key, value, reciever);
+
       let type: PatchType = "add";
       if (Object.hasOwn(target, key)) type = "update";
+
       patches.push({
         type,
         path,
