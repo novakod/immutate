@@ -1,20 +1,21 @@
 import { createDeepProxy } from "@novakod/deep-proxy";
 import { Patch, PatchType } from "../types";
 import { isPureObject } from "@novakod/is-pure-object";
+import { deepClone } from "./deep-clone";
 
 type MutateCb<Data extends object> = (data: Data) => void;
 
 export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<Data>): Patch[] {
   const patches: Patch[] = [];
 
-  const deepProxy = createDeepProxy(data, {
+  const deepProxy = createDeepProxy(deepClone(data), {
     get({ target, key, path, reciever }) {
       if (typeof target[key] === "function" && !Array.isArray(target) && !isPureObject(target)) {
         console.log("proxified function get: ", key, target);
         return (...args: any[]) => {
-          const prevTarget = structuredClone(target);
+          const prevTarget = deepClone(target);
           const result = Reflect.apply(target[key], target, args);
-          const nextTarget = structuredClone(target);
+          const nextTarget = deepClone(target);
 
           patches.push({
             type: "update",
@@ -34,8 +35,8 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
       patches.push({
         type,
         path,
-        previousValue: structuredClone(target[key]),
-        nextValue: structuredClone(value),
+        previousValue: deepClone(target[key]),
+        nextValue: deepClone(value),
       });
 
       return Reflect.set(target, key, value, reciever);
@@ -44,7 +45,7 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
       patches.push({
         type: "remove",
         path,
-        previousValue: structuredClone(target[key]),
+        previousValue: deepClone(target[key]),
         nextValue: undefined,
       });
 
