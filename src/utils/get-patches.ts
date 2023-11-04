@@ -1,9 +1,7 @@
 import { createDeepProxy } from "@novakod/deep-proxy";
-import { Patch, PatchType } from "../types";
+import { MutateCb, Patch, PatchType } from "../types";
 import { isPureObject } from "@novakod/is-pure-object";
 import { deepClone } from "@novakod/deep-clone";
-
-type MutateCb<Data extends object> = (data: Data) => void;
 
 export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<Data>): Patch[] {
   const patches: Patch[] = [];

@@ -1,1 +1,1 @@
-export { getPatches, applyPatches, reversePatches } from "./src/utils";
+export { getPatches, applyPatches, reversePatches, immutate } from "./src/utils";
