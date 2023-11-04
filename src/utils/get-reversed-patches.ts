@@ -1,6 +1,6 @@
 import { Patch } from "../types";
 
-export function reversePatches(patches: Patch[]): Patch[] {
+export function getReversedPatches(patches: Patch[]): Patch[] {
   return [...patches].reverse().map<Patch>((patch) => {
     switch (patch.type) {
       case "add":

@@ -1,8 +1,8 @@
 import { test, expect } from "vitest";
-import { applyPatches, getPatches, reversePatches } from "../src/utils";
+import { applyPatches, getPatches, getReversedPatches } from "../src/utils";
 import { deepClone } from "@novakod/deep-clone";
 
-test("Тестирование функции reversePatches на простых данных", () => {
+test("Тестирование функции getReversedPatches на простых данных", () => {
   const data = {
     tags: ["first", "second"],
     count: 2,
@@ -14,13 +14,13 @@ test("Тестирование функции reversePatches на простых
   });
   const copiedData = deepClone(data);
   applyPatches(copiedData, patches);
-  const reversedPatches = reversePatches(patches);
+  const reversedPatches = getReversedPatches(patches);
   applyPatches(copiedData, reversedPatches);
 
   expect(copiedData).toEqual(data);
 });
 
-test("Тестирование функции reversePatches на сложных данных", () => {
+test("Тестирование функции getReversedPatches на сложных данных", () => {
   class Figure {
     propertiesMap = new Map();
 
@@ -53,7 +53,7 @@ test("Тестирование функции reversePatches на сложных
   });
   const copiedData = deepClone(data);
   applyPatches(copiedData, patches);
-  const reversedPatches = reversePatches(patches);
+  const reversedPatches = getReversedPatches(patches);
   applyPatches(copiedData, reversedPatches);
   expect(copiedData).toEqual<typeof data>(data);
 
@@ -64,7 +64,7 @@ test("Тестирование функции reversePatches на сложных
   });
   const copiedData2 = deepClone(data);
   applyPatches(copiedData2, patches2);
-  const reversedPatches2 = reversePatches(patches2);
+  const reversedPatches2 = getReversedPatches(patches2);
   applyPatches(copiedData2, reversedPatches2);
   expect(copiedData2).toEqual<typeof data>(data);
 });
