@@ -1,7 +1,16 @@
 {
-  "name": "immutate",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@novakod/immutate",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/novakod/immutate.git"
+  },
+  "homepage": "https://github.com/novakod/immutate#readme",
+  "author": {
+    "name": "Movsar Khalakhoev"
+  },
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
