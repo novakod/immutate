@@ -1,7 +1,7 @@
 import { createDeepProxy } from "@novakod/deep-proxy";
 import { Patch, PatchType } from "../types";
 import { isPureObject } from "@novakod/is-pure-object";
-import { deepClone } from "./deep-clone";
+import { deepClone } from "@novakod/deep-clone";
 
 type MutateCb<Data extends object> = (data: Data) => void;
 

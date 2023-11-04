@@ -15,8 +15,8 @@
     "vite-bundle-visualizer": "^0.10.0"
   },
   "dependencies": {
+    "@novakod/deep-clone": "^1.0.0",
     "@novakod/deep-proxy": "^0.5.5",
-    "@novakod/is-pure-object": "^1.0.4",
-    "klona": "^2.0.6"
+    "@novakod/is-pure-object": "^1.0.4"
   }
 }
