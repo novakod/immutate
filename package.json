@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "test": "vitest",
     "visualize-build": "vite-bundle-visualizer",
     "release": "npm publish --access public"
   },
   "devDependencies": {
+    "date-fns": "^2.30.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vite-bundle-visualizer": "^0.10.0"
+    "vite-bundle-visualizer": "^0.10.0",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "@novakod/deep-clone": "^1.0.0",
