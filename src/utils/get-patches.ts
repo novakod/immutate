@@ -9,7 +9,6 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
   const deepProxy = createDeepProxy(deepClone(data), {
     get({ target, key, path, reciever }) {
       if (typeof target[key] === "function" && !Array.isArray(target) && !isPureObject(target)) {
-        console.log("proxified function get: ", key, target);
         return (...args: any[]) => {
           const prevTarget = deepClone(target);
           const result = Reflect.apply(target[key], target, args);
