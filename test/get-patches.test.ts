@@ -184,3 +184,46 @@ test("Тестирование функции getPatches на нетривиал
     },
   ]);
 });
+
+test("Тестирование функции getPatches при изменении вложенных данных в уже изменённых данных", () => {
+  const birthday = new Date();
+  const data = {
+    users: [
+      {
+        id: 1,
+        name: "Мага",
+        birthday,
+      },
+    ],
+    usersCount: 1,
+  };
+
+  const patches = getPatches(data, (data) => {
+    data.users.push({
+      id: 2,
+      name: "Руслан",
+      birthday,
+    });
+
+    data.users[1].name = "Мага";
+  });
+
+  expect(patches).toEqual<Patch[]>([
+    {
+      type: "add",
+      path: ["users", "1"],
+      previousValue: undefined,
+      nextValue: {
+        id: 2,
+        name: "Руслан",
+        birthday,
+      },
+    },
+    {
+      type: "update",
+      path: ["users", "1", "name"],
+      previousValue: "Руслан",
+      nextValue: "Мага",
+    },
+  ]);
+});
