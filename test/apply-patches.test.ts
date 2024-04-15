@@ -1,7 +1,7 @@
 import { test, expect } from "vitest";
 import { applyPatches, getPatches } from "../src/utils";
-import { deepClone } from "@novakod/deep-clone";
 import { setMinutes } from "date-fns";
+import { klona } from "klona";
 
 test("Тестирование функции applyPatches на простых данных", () => {
   const data = {
@@ -13,7 +13,7 @@ test("Тестирование функции applyPatches на простых �
     data.tags.push("third");
     data.count++;
   });
-  const copiedData = deepClone(data);
+  const copiedData = klona(data);
   applyPatches(copiedData, patches);
   expect(copiedData).toEqual<typeof data>({
     tags: ["first", "second", "third"],
@@ -24,7 +24,7 @@ test("Тестирование функции applyPatches на простых �
     data.tags = [];
     data.count = 0;
   });
-  const copiedData2 = deepClone(data);
+  const copiedData2 = klona(data);
   applyPatches(copiedData2, patches2);
   expect(copiedData2).toEqual<typeof data>({
     tags: [],
@@ -64,7 +64,7 @@ test("Тестирование функции applyPatches на сложных �
     data.users.push(newUser);
     data.usersCount++;
   });
-  const copiedData = deepClone(data);
+  const copiedData = klona(data);
   applyPatches(copiedData, patches);
   expect(copiedData).toEqual<typeof data>({
     users: [...data.users, newUser],
@@ -75,7 +75,7 @@ test("Тестирование функции applyPatches на сложных �
     data.users[0].birthday.setMinutes(10);
     data.users[0].figures[0].addProperty("color", "red");
   });
-  const copiedData2 = deepClone(data);
+  const copiedData2 = klona(data);
   applyPatches(copiedData2, patches2);
   expect(copiedData2).toEqual<typeof data>({
     users: [

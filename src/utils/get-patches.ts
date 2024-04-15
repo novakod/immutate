@@ -1,18 +1,18 @@
 import { createDeepProxy } from "@novakod/deep-proxy";
 import { MutateCb, Patch, PatchType } from "../types";
 import { isPureObject } from "@novakod/is-pure-object";
-import { deepClone } from "@novakod/deep-clone";
+import { klona } from "klona";
 
 export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<Data>): Patch[] {
   const patches: Patch[] = [];
 
-  const deepProxy = createDeepProxy(deepClone(data), {
+  const deepProxy = createDeepProxy(klona(data), {
     get({ target, key, path, reciever }) {
       if (typeof target[key] === "function" && !Array.isArray(target) && !isPureObject(target)) {
         return (...args: any[]) => {
-          const prevTarget = deepClone(target);
+          const prevTarget = klona(target);
           const result = Reflect.apply(target[key], target, args);
-          const nextTarget = deepClone(target);
+          const nextTarget = klona(target);
 
           patches.push({
             type: "update",
@@ -35,8 +35,8 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
       patches.push({
         type,
         path,
-        previousValue: deepClone(target[key]),
-        nextValue: deepClone(value),
+        previousValue: klona(target[key]),
+        nextValue: klona(value),
       });
 
       return Reflect.set(target, key, value, reciever);
@@ -45,7 +45,7 @@ export function getPatches<Data extends object>(data: Data, mutateCb: MutateCb<D
       patches.push({
         type: "remove",
         path,
-        previousValue: deepClone(target[key]),
+        previousValue: klona(target[key]),
         nextValue: undefined,
       });
 

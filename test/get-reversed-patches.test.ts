@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
 import { applyPatches, getPatches, getReversedPatches } from "../src/utils";
-import { deepClone } from "@novakod/deep-clone";
+import { klona } from "klona";
 
 test("Тестирование функции getReversedPatches на простых данных", () => {
   const data = {
@@ -12,7 +12,7 @@ test("Тестирование функции getReversedPatches на прост
     data.tags.push("third");
     data.count = 3;
   });
-  const copiedData = deepClone(data);
+  const copiedData = klona(data);
   applyPatches(copiedData, patches);
   const reversedPatches = getReversedPatches(patches);
   applyPatches(copiedData, reversedPatches);
@@ -51,7 +51,7 @@ test("Тестирование функции getReversedPatches на сложн
     });
     data.usersCount++;
   });
-  const copiedData = deepClone(data);
+  const copiedData = klona(data);
   applyPatches(copiedData, patches);
   const reversedPatches = getReversedPatches(patches);
   applyPatches(copiedData, reversedPatches);
@@ -62,7 +62,7 @@ test("Тестирование функции getReversedPatches на сложн
     data.users[0].birthday.setMinutes(10);
     data.users[0].figures[0].addProperty("color", "red");
   });
-  const copiedData2 = deepClone(data);
+  const copiedData2 = klona(data);
   applyPatches(copiedData2, patches2);
   const reversedPatches2 = getReversedPatches(patches2);
   applyPatches(copiedData2, reversedPatches2);
