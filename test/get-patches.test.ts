@@ -1,6 +1,6 @@
 import { test, expect } from "vitest";
-import { Patch, getPatches } from "../";
 import { setHours, setMinutes } from "date-fns";
+import { Patch, getPatches } from "../src";
 
 test("Тестирование функции getPatches на простых данных", () => {
   const data = {
