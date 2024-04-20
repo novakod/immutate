@@ -1,10 +1,9 @@
 import { Suite, Event } from "benchmark";
 import { immutate } from "./..";
 import { create } from "mutative";
-import { enablePatches, produce, setAutoFreeze } from "immer";
+import { enablePatches, produce } from "immer";
 import { getData } from "./utils/get-data";
 
-setAutoFreeze(true);
 enablePatches();
 const suite = new Suite();
 
