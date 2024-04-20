@@ -9,7 +9,7 @@ test("Тестирование функции applyPatches на простых �
     count: 2,
   };
 
-  const patches = getPatches(data, (data) => {
+  const [patches, reversePatches] = getPatches(data, (data) => {
     data.tags.push("third");
     data.count++;
   });
@@ -20,7 +20,7 @@ test("Тестирование функции applyPatches на простых �
     count: 3,
   });
 
-  const patches2 = getPatches(data, (data) => {
+  const [patches2, reversePatches2] = getPatches(data, (data) => {
     data.tags = [];
     data.count = 0;
   });
@@ -60,7 +60,7 @@ test("Тестирование функции applyPatches на сложных �
     birthday: new Date(),
     figures: [new Figure()],
   };
-  const patches = getPatches(data, (data) => {
+  const [patches, reversePatches] = getPatches(data, (data) => {
     data.users.push(newUser);
     data.usersCount++;
   });
@@ -71,7 +71,7 @@ test("Тестирование функции applyPatches на сложных �
     usersCount: 2,
   });
 
-  const patches2 = getPatches(data, (data) => {
+  const [patches2, reversePatches2] = getPatches(data, (data) => {
     data.users[0].birthday.setMinutes(10);
     data.users[0].figures[0].addProperty("color", "red");
   });
