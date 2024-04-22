@@ -1,2 +1,2 @@
-export { getPatches, applyPatches, immutate } from "./utils";
+export { getPatches, applyPatches, immutate, reversePatch } from "./utils";
 export type { Patch, PatchType, MutateCb } from "./types";
