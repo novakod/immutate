@@ -1,6 +1,6 @@
 {
   "name": "@novakod/immutate",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/novakod/immutate.git"
@@ -11,8 +11,8 @@
   },
   "license": "MIT",
   "type": "module",
-  "main": "./dist/deep-signals.umd.cjs",
-  "module": "./dist/deep-signals.js",
+  "main": "./dist/immutate.js.umd.cjs",
+  "module": "./dist/immutate.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
