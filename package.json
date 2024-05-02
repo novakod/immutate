@@ -34,7 +34,7 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
-    "@novakod/deep-proxy": "^0.10.0",
+    "@novakod/deep-proxy": "^0.11.0",
     "@novakod/is-pure-object": "^1.0.4",
     "klona": "2.0.6"
   }
